@@ -1,3 +1,4 @@
+
 package com.jhj.controller;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class MemberController extends HttpServlet {
 	 */
 	public MemberController() {
 		super();
+		// TODO Auto-generated constructor stub
 		memberService = new MemberService();
 	}
 
@@ -40,8 +42,12 @@ public class MemberController extends HttpServlet {
 		String command = request.getPathInfo();
 		ActionFoward actionFoward = null;
 
-		if (command.equals("/memberJoin.do")) {
+		if(command.equals("/memberJoin.do")) {
 			actionFoward = memberService.join(request, response);
+		}else if(command.equals("/memberList.do")) {
+			actionFoward = new ActionFoward();
+			actionFoward.setCheck(true);
+			actionFoward.setPath("../WEB-INF/view/member/memberList.jsp");
 		}
 
 		if (actionFoward.isCheck()) {

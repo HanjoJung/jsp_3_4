@@ -6,19 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="../../../temp/bootstrap.jsp"></c:import>
+<c:import url="../../../temp/bootStrap.jsp" />
 </head>
 <body>
-	<c:import url="../../../temp/header.jsp"></c:import>
+	<c:import url="../../../temp/header.jsp" />
 
 	<div class="container-fluid">
 		<div class="row">
-		<!-- 로그인 전 -->
-		<a href="./memberLogin.do">Login</a>
-		<a href="./memberJoin.do">Login</a>
-		<!-- 로그인 후 -->
-		<a href="./memberLogout.do">Login</a>
-		<a href="./memberMypage.do">Login</a>
+			<!-- 로그인 전 -->
+			<a href="./memberLogin.do">Login</a> 
+			<a href="./memberJoin.do">Join</a>
+			<!-- 로그인 후 -->
+			<a href="./memberLogOut.do">LogOut</a> 
+			<a href="./memberMypage.do">MyPage</a>
 		</div>
 	</div>
 

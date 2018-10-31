@@ -10,6 +10,8 @@ public class MemberDTO {
 	private String classMate;
 	private int grade;
 	private int ban;
+	private String fname;
+	private String oname;
 
 	public String getId() {
 		return id;
@@ -73,6 +75,22 @@ public class MemberDTO {
 
 	public void setBan(int ban) {
 		this.ban = ban;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public String getOname() {
+		return oname;
+	}
+
+	public void setOname(String oname) {
+		this.oname = oname;
 	}
 
 }

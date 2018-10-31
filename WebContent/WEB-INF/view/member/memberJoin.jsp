@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="../../../temp/bootstrap.jsp"></c:import>
+<c:import url="../../../temp/bootStrap.jsp"/>
 </head>
 <body>
-	<c:import url="../../../temp/header.jsp"></c:import>
+	<c:import url="../../../temp/header.jsp"/>
 
 	<div class="container-fluid">
 		<div class="row">

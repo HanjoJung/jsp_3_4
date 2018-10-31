@@ -8,6 +8,7 @@
     <servlet-name>qna</servlet-name>
     <url-pattern>/qna/*</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>notice</servlet-name>
     <servlet-class>com.jhj.controller.NoticeController</servlet-class>
@@ -16,6 +17,7 @@
     <servlet-name>notice</servlet-name>
     <url-pattern>/notice/*</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>member</servlet-name>
     <servlet-class>com.jhj.controller.MemberController</servlet-class>
