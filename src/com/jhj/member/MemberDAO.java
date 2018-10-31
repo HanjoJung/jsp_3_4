@@ -52,7 +52,7 @@ public class MemberDAO {
 		DBConnector.disConnect(rs, st, con);
 		return memberDTO;
 	}
-	public int insert(MemberDTO memberDTO) throws Exception {
+	public int join(MemberDTO memberDTO) throws Exception {
 		Connection con = DBConnector.getConnect();
 		String sql="insert into member values(?,?,?,?,?,?)";
 		

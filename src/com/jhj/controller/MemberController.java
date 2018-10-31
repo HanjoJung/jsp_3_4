@@ -10,23 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jhj.action.ActionFoward;
-import com.jhj.notice.NoticeService;
+import com.jhj.member.MemberService;
 
 /**
- * Servlet implementation class NoticeController
+ * Servlet implementation class MemberController
  */
-@WebServlet("/NoticeController")
-public class NoticeController extends HttpServlet {
+@WebServlet("/MemberController")
+public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	NoticeService noticeService;
+	private MemberService memberService;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public NoticeController() {
+	public MemberController() {
 		super();
-		noticeService = new NoticeService();
+		memberService = new MemberService();
 	}
 
 	/**
@@ -38,23 +37,11 @@ public class NoticeController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		// /notice/notice***.do
-		// /notice***.do
 		String command = request.getPathInfo();
-
-		// foward, redirect
 		ActionFoward actionFoward = null;
 
-		if (command.equals("/noticeList.do")) {
-			actionFoward = noticeService.selectList(request, response);
-		} else if (command.equals("/noticeSelectOne.do")) {
-			actionFoward = noticeService.selectOne(request, response);
-		} else if (command.equals("/noticeWrite.do")) {
-			actionFoward = noticeService.insert(request, response);
-		} else if (command.equals("/noticeUpdate.do")) {
-			actionFoward = noticeService.update(request, response);
-		} else if (command.equals("/noticeDelete.do")) {
-			actionFoward = noticeService.delete(request, response);
+		if (command.equals("/memberJoin.do")) {
+			actionFoward = memberService.join(request, response);
 		}
 
 		if (actionFoward.isCheck()) {
@@ -63,7 +50,6 @@ public class NoticeController extends HttpServlet {
 		} else {
 			response.sendRedirect(actionFoward.getPath());
 		}
-
 	}
 
 	/**
