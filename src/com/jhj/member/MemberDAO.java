@@ -9,7 +9,9 @@ import com.jhj.util.DBConnector;
 public class MemberDAO {
 	public MemberDTO login(MemberDTO memberDTO) throws Exception {
 		Connection con = DBConnector.getConnect();
-		String sql="select * from member where id=? and pw=? and kind = ?";
+		String sql="select id, pw, name, email, kind, m.classMate, grade, ban, fname, oname "
+				+ "from member m " + 
+				"LEFT JOIN team t on (m.classmate = t.classmate) where id=? and pw=? and kind=?";
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, memberDTO.getId());
@@ -23,6 +25,8 @@ public class MemberDAO {
 			memberDTO.setClassMate(rs.getString("classMate"));
 			memberDTO.setFname(rs.getString("fname"));
 			memberDTO.setOname(rs.getString("oname"));
+			memberDTO.setGrade(rs.getInt("grade"));
+			memberDTO.setBan(rs.getInt("ban"));
 		}else {
 			memberDTO =null;
 		}
@@ -31,21 +35,6 @@ public class MemberDAO {
 		return memberDTO;
 	}
 	public MemberDTO logout(MemberDTO memberDTO) throws Exception {
-		Connection con = DBConnector.getConnect();
-		String sql="select id, pw, name, email, kind, m.classMate, grade, ban from member m " + 
-				"LEFT JOIN team t on (m.classmate = t.classmate) where id=? and pw=?";
-		
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, memberDTO.getId());
-		st.setString(2, memberDTO.getPw());
-		ResultSet rs = st.executeQuery();
-		if(rs.next()) {
-			
-		}
-		DBConnector.disConnect(rs, st, con);
-		return memberDTO;
-	}
-	public MemberDTO selectOne(MemberDTO memberDTO) throws Exception {
 		Connection con = DBConnector.getConnect();
 		String sql="select id, pw, name, email, kind, m.classMate, grade, ban from member m " + 
 				"LEFT JOIN team t on (m.classmate = t.classmate) where id=? and pw=?";
@@ -80,26 +69,25 @@ public class MemberDAO {
 	}
 	public int update(MemberDTO memberDTO) throws Exception {
 		Connection con = DBConnector.getConnect();
-		String sql="update member set pw=?, name=?, email=?, kind=?, classmate=? where id=?";
+		String sql="update member set pw=?, name=?, email=?, classmate=? where id=?";
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		st.setString(1, memberDTO.getPw());
 		st.setString(2, memberDTO.getName());
 		st.setString(3, memberDTO.getEmail());
-		st.setString(4, memberDTO.getKind());
-		st.setString(5, memberDTO.getClassMate());
-		st.setString(6, memberDTO.getId());
+		st.setString(4, memberDTO.getClassMate());
+		st.setString(5, memberDTO.getId());
 		int result = st.executeUpdate();
 		
 		DBConnector.disConnect( st, con);
 		return result;
 	}
-	public int delete(MemberDTO memberDTO) throws Exception {
+	public int delete(String id) throws Exception {
 		Connection con = DBConnector.getConnect();
 		String sql="delete member where id=?";
 		
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, memberDTO.getId());
+		st.setString(1, id);
 		int result = st.executeUpdate();
 		
 		DBConnector.disConnect( st, con);

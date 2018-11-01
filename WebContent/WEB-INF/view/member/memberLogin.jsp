@@ -31,7 +31,7 @@
 						type="radio" id="kind" name="kind" value="S">
 				</div>
 
-				<button type="submit" class="btn btn-default">Write</button>
+				<button type="submit" class="btn btn-default">로그인</button>
 			</form>
 		</div>
 	</div>

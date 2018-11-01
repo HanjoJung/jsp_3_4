@@ -13,11 +13,11 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<form action="./memberJoin.do" method="post"
+			<form action="./memberUpdate.do" method="post"
 				enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="id">ID:</label> <input type="text" class="form-control"
-						id="id" placeholder="Enter id" name="id">
+						id="id" readonly="readonly" name="id" value="${member.id}">
 				</div>
 				<div class="form-group">
 					<label for="pw1">PASSWORD:</label> <input type="password"
@@ -30,8 +30,9 @@
 						name="pw2">
 				</div>
 				<div class="form-group">
-					<label for="name">이름:</label> <input type="text" class="form-control"
-						id="name" placeholder="Enter name" name="name">
+					<label for="name">이름:</label> <input type="text"
+						class="form-control" id="name" placeholder="Enter name"
+						name="name">
 				</div>
 				<div class="form-group">
 					<label for="email">E-mail:</label> <input type="email"
@@ -61,7 +62,7 @@
 						class="form-control" id="file" name="f">
 				</div>
 
-				<button type="submit" class="btn btn-default">가입</button>
+				<button type="submit" class="btn btn-default">수정</button>
 			</form>
 		</div>
 	</div>
