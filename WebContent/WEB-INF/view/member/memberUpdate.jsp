@@ -32,34 +32,16 @@
 				<div class="form-group">
 					<label for="name">이름:</label> <input type="text"
 						class="form-control" id="name" placeholder="Enter name"
-						name="name">
+						name="name" value="${member.name}">
 				</div>
 				<div class="form-group">
 					<label for="email">E-mail:</label> <input type="email"
 						class="form-control" id="email" placeholder="Enter E-mail"
-						name="email">
-				</div>
-				<div class="form-group">
-					선생님<input type="radio" id="kind" name="kind" value="T"> 학생<input
-						type="radio" id="kind" name="kind" value="S">
-				</div>
-				<div class="form-group">
-					<p>
-						1학년<input type="radio" id="grade" name="grade" value="1">
-						1반<input type="radio" id="ban" name="ban" value="1">
-					</p>
-					<p>
-						2학년<input type="radio" id="grade" name="grade" value="2">
-						2반<input type="radio" id="ban" name="ban" value="2">
-					</p>
-					<p>
-						3학년<input type="radio" id="grade" name="grade" value="3">
-						3반<input type="radio" id="ban" name="ban" value="3">
-					</p>
+						name="email" value="${member.email}">
 				</div>
 				<div class="form-group">
 					<label for="file">프로필 사진:</label> <input type="file"
-						class="form-control" id="file" name="f">
+						class="form-control" id="file" name="f" value="${member.fname}">
 				</div>
 
 				<button type="submit" class="btn btn-default">수정</button>

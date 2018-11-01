@@ -1,8 +1,6 @@
 package com.jhj.member;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -119,9 +117,10 @@ public class MemberService {
 	public ActionFoward update(HttpServletRequest request, HttpServletResponse response) {
 		ActionFoward actionFoward = new ActionFoward();
 		String method = request.getMethod();
-		HttpSession session = request.getSession();
 
 		if (method.equals("POST")) { // DB Update
+			request.setAttribute("message", "수정 실패");
+			request.setAttribute("path", "./memberUpdate.do");
 			int max = 1024 * 1024 * 10;
 			String path = request.getServletContext().getRealPath("upload");
 			File file = new File(path);
@@ -132,45 +131,40 @@ public class MemberService {
 			try {
 				MultipartRequest multi = new MultipartRequest(request, path, max, "UTF-8",
 						new DefaultFileRenamePolicy());
-				MemberDAO memberDAO = new MemberDAO(); // update
-				int result = 0;
+				HttpSession session = request.getSession();
+				MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+				memberDTO.setId(multi.getParameter("id"));
+				memberDTO.setPw(multi.getParameter("pw2"));
+				memberDTO.setName(multi.getParameter("name"));
+				memberDTO.setEmail(multi.getParameter("email"));
+				file = multi.getFile("f");
+				if (file != null) {
+					file = new File(path,memberDTO.getFname());
+					file.delete();
+					memberDTO.setFname(multi.getFilesystemName("f"));
+					memberDTO.setOname(multi.getOriginalFileName("f"));
+				}
+				int result = memberDAO.update(memberDTO);
 				if (result > 0) {
-					Enumeration<Object> e = multi.getFileNames();
-						String key = (String) e.nextElement();
-						fileDTO.setOname(multi.getOriginalFileName(key));
-						fileDTO.setFname(multi.getFilesystemName(key));
-						fileDTO.setKind("N");
-
-					request.setAttribute("message", "Update Success");
-					request.setAttribute("path", "./noticeList.do");
-				} else { // update fail
-					request.setAttribute("message", "Update Fail");
-					request.setAttribute("path", "./noticeList.do");
+					request.setAttribute("message", "수정 성공");
+					request.setAttribute("path", "./memberSelectOne.do");
+					session.setAttribute("member", memberDTO);
 				}
 
 			} catch (Exception e) {
-				request.setAttribute("message", "Update Fail");
-				request.setAttribute("path", "./noticeList.do");
 				e.printStackTrace();
 			}
 
 			actionFoward.setCheck(true);
 			actionFoward.setPath("../WEB-INF/view/common/result.jsp");
 
-		} else
-
-		{ // Form
-			try {
-				int num = Integer.parseInt(request.getParameter("num"));
-				fileDTO.setNum(num);
-				fileDTO.setKind("N");
-				actionFoward.setCheck(true);
-				actionFoward.setPath("../WEB-INF/view/board/boardUpdate.jsp");
-			} catch (Exception e) {
-			}
+		} else {
+			actionFoward.setCheck(true);
+			actionFoward.setPath("../WEB-INF/view/member/memberUpdate.jsp");
 		}
 
 		return actionFoward;
+
 	}
 
 	public ActionFoward delete(HttpServletRequest request, HttpServletResponse response) {
