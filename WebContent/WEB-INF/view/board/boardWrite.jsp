@@ -8,6 +8,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../../../temp/bootStrap.jsp"></jsp:include>
+<script type="text/javascript">
+	$(function() {
+		$("#btn").click(function() {
+			if($("#title") == null)
+				alert("제목을 입력하세요");
+		})
+	})
+</script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar"
 	data-offset="60">
@@ -42,7 +50,7 @@
 						class="form-control" id="file" name="f2">
 				</div>
 
-				<button type="submit" class="btn btn-default">등록</button>
+				<button id="btn" class="btn btn-default">등록</button>
 			</form>
 		</div>
 	</div>

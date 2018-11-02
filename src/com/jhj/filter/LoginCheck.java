@@ -1,6 +1,11 @@
 package com.jhj.filter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -19,12 +24,13 @@ import com.jhj.member.MemberDTO;
  */
 @WebFilter("/LoginCheck")
 public class LoginCheck implements Filter {
+	Map<String, String> map;
 
 	/**
 	 * Default constructor.
 	 */
 	public LoginCheck() {
-		// TODO Auto-generated constructor stub
+		map = new HashMap<>();
 	}
 
 	/**
@@ -39,13 +45,20 @@ public class LoginCheck implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		String command = ((HttpServletRequest) request).getPathInfo();
+		String check = map.get(command);
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-		if (memberDTO != null) {
+
+		if (check != null) {
+			if (memberDTO != null) {
+				chain.doFilter(request, response);
+			} else {
+//			((HttpServletResponse)response).sendRedirect("../index.jsp");
+				((HttpServletResponse) response).sendRedirect("../WEB-INF/view/member/memberLogin.jsp");
+			}
+		} else {
 			chain.doFilter(request, response);
-		}else {
-			((HttpServletResponse)response).sendRedirect("../index.jsp");
-			//((HttpServletResponse)response).sendRedirect("../WEB-INF/view/member/memberLogin.jsp");
 		}
 	}
 
@@ -53,7 +66,9 @@ public class LoginCheck implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		map.put("/noticeSelectOne.do", "");
+		map.put("/noticeWrite.do", "");
+		map.put("/qnaWrite.do", "");
 	}
 
 }

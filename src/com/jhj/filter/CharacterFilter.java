@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
  */
 @WebFilter("/CharacterFilter")
 public class CharacterFilter implements Filter {
-
+private String encode;
 	/**
 	 * Default constructor.
 	 */
@@ -35,8 +35,8 @@ public class CharacterFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding(encode);
+		response.setCharacterEncoding(encode);
 		// place your code here
 
 		// pass the request along the filter chain
@@ -51,7 +51,7 @@ public class CharacterFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		encode = fConfig.getInitParameter("encode");
 		// 이 클래스의 객체가 생성될 때
 	}
 

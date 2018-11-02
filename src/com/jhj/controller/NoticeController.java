@@ -35,6 +35,7 @@ public class NoticeController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String phone = request.getServletContext().getInitParameter("phone");
 		// /notice/notice***.do
 		// /notice***.do
 		String command = request.getPathInfo();
