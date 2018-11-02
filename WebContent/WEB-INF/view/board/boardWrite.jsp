@@ -8,11 +8,41 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="../../../temp/bootStrap.jsp"></jsp:include>
+<script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
 <script type="text/javascript">
 	$(function() {
+		var count = 1;
+		var index = 0;
+		$("#file_btn")
+				.click(
+						function() {
+							var file = document.getElementById("file")
+								if(count<6){
+									var r = '<div class="form-group" id="f'+index+'">';
+									r = r+'<input type="file" class="form-control" id="file" name="f'+index+'">';
+									r = r+'<span class="remove"style="color:red;" title="'+index+'">X</span>'; 
+									r = r+'</div>';
+									$("#file").append(r);
+									//file.innerHTML += r;
+									count++;
+									index++;
+							} else {
+								alert("파일은 5개까지만 등록 가능합니다");
+							}
+						})
+			$("#file").on("click", ".remove", function() {
+				var t = $(this).attr("title");
+				$("#f"+t).remove();
+				count--;
+			});
+
 		$("#btn").click(function() {
-			if($("#title") == null)
+			var title = $("#title").val();
+			if (title != "") {
+				$("#frm").submit();
+			} else {
 				alert("제목을 입력하세요");
+			}
 		})
 	})
 </script>
@@ -24,7 +54,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<form action="./${board}Write.do" method="post"
+			<form id="frm" action="./${board}Write.do" method="post"
 				enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="title">Title:</label> <input type="text"
@@ -36,21 +66,21 @@
 						class="form-control" id="writer" readonly="readonly"
 						value="${member.id}" name="writer">
 				</div>
+				
 				<div class="form-group">
 					<label for="contents">Contents:</label>
-					<textarea rows="25" cols="" class="form-control" name="contents"></textarea>
+					<textarea rows="15" cols="" class="form-control" name="contents"></textarea>
 				</div>
 
-				<div class="form-group">
-					<label for="file">File:</label> <input type="file"
-						class="form-control" id="file" name="f1">
-				</div>
-				<div class="form-group">
-					<label for="file">File:</label> <input type="file"
-						class="form-control" id="file" name="f2">
-				</div>
+				<script>
+					CKEDITOR.replace('contents');
+				</script>
+				
+				<input id="file_btn" type="button" value="추가"
+					class="btn btn-default">
+				<div class="files" id="file"></div>
 
-				<button id="btn" class="btn btn-default">등록</button>
+				<input type="button" id="btn" class="btn btn-default" value="등록">
 			</form>
 		</div>
 	</div>

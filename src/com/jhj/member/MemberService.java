@@ -17,6 +17,28 @@ public class MemberService {
 		memberDAO = new MemberDAO();
 	}
 
+	public ActionFoward checkId(HttpServletRequest request, HttpServletResponse response) {
+		ActionFoward actionFoward = new ActionFoward();
+		
+		String id = request.getParameter("id");
+		boolean check=true;
+		String result="1";//사용가능, no
+		
+		try {
+			check = memberDAO.checkId(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(check) {
+			result="2";
+		}
+		request.setAttribute("result", result);
+		actionFoward.setCheck(true);
+		actionFoward.setPath("../WEB-INF/view/member/memberCheckId.jsp");
+		return actionFoward;
+	}
+
 	// join
 	public ActionFoward join(HttpServletRequest request, HttpServletResponse response) {
 		ActionFoward actionFoward = new ActionFoward();
@@ -139,7 +161,7 @@ public class MemberService {
 				memberDTO.setEmail(multi.getParameter("email"));
 				file = multi.getFile("f");
 				if (file != null) {
-					file = new File(path,memberDTO.getFname());
+					file = new File(path, memberDTO.getFname());
 					file.delete();
 					memberDTO.setFname(multi.getFilesystemName("f"));
 					memberDTO.setOname(multi.getOriginalFileName("f"));

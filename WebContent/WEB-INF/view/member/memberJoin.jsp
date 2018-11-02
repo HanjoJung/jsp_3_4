@@ -7,6 +7,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../../../temp/bootStrap.jsp" />
+<script type="text/javascript">
+	$(function() {
+		$("#btn").click(
+				function() {
+
+					var id=document.frm.id.value;
+					window.open("./memberCheckId.do?id="+id, "", "width=300, height=200, top=300, left=500");
+				})
+	})
+</script>
 </head>
 <body>
 	<c:import url="../../../temp/header.jsp" />
@@ -14,11 +24,12 @@
 	<div class="container-fluid">
 		<div class="row">
 			<form action="./memberJoin.do" method="post"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data" name="frm">
 				<div class="form-group">
 					<label for="id">ID:</label> <input type="text" class="form-control"
 						id="id" placeholder="Enter id" name="id">
 				</div>
+				<input type="button" id="btn" class="btn btn-default" value="중복확인">
 				<div class="form-group">
 					<label for="pw1">PASSWORD:</label> <input type="password"
 						class="form-control" id="pw1" placeholder="Enter password"
@@ -30,8 +41,9 @@
 						name="pw2">
 				</div>
 				<div class="form-group">
-					<label for="name">이름:</label> <input type="text" class="form-control"
-						id="name" placeholder="Enter name" name="name">
+					<label for="name">이름:</label> <input type="text"
+						class="form-control" id="name" placeholder="Enter name"
+						name="name">
 				</div>
 				<div class="form-group">
 					<label for="email">E-mail:</label> <input type="email"
@@ -39,21 +51,21 @@
 						name="email">
 				</div>
 				<div class="form-group">
-					선생님<input type="radio" id="kind" name="kind" value="T"> 학생<input
-						type="radio" id="kind" name="kind" value="S">
+					선생님<input type="radio" name="kind" value="T"> 학생<input
+						type="radio" name="kind" value="S">
 				</div>
 				<div class="form-group">
 					<p>
-						1학년<input type="radio" id="grade" name="grade" value="1">
-						1반<input type="radio" id="ban" name="ban" value="1">
+						1학년<input type="radio" name="grade" value="1"> 1반<input
+							type="radio" name="ban" value="1">
 					</p>
 					<p>
-						2학년<input type="radio" id="grade" name="grade" value="2">
-						2반<input type="radio" id="ban" name="ban" value="2">
+						2학년<input type="radio" name="grade" value="2"> 2반<input
+							type="radio" name="ban" value="2">
 					</p>
 					<p>
-						3학년<input type="radio" id="grade" name="grade" value="3">
-						3반<input type="radio" id="ban" name="ban" value="3">
+						3학년<input type="radio" name="grade" value="3"> 3반<input
+							type="radio" name="ban" value="3">
 					</p>
 				</div>
 				<div class="form-group">

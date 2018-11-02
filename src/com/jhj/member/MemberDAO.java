@@ -7,6 +7,21 @@ import java.sql.ResultSet;
 import com.jhj.util.DBConnector;
 
 public class MemberDAO {
+	
+	public boolean checkId(String id) throws Exception {
+		Connection con = DBConnector.getConnect();
+		String sql = "select id from member where id=?";
+		boolean check = true;
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setString(1, id);
+		ResultSet rs = st.executeQuery();
+		check = rs.next();
+
+		DBConnector.disConnect(rs, st, con);
+		return check;
+	}
+	
 	public MemberDTO login(MemberDTO memberDTO) throws Exception {
 		Connection con = DBConnector.getConnect();
 		String sql = "select id, pw, name, email, kind, m.classMate, grade, ban, fname, oname " + "from member m "
