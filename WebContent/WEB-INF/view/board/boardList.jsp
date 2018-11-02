@@ -13,7 +13,7 @@
 	<c:import url="../../../temp/header.jsp" />
 	<div class="container-fluid">
 		<div class="row">
-				<h1>${board.toUpperCase()}</h1>
+			<h1>${board.toUpperCase()}</h1>
 		</div>
 		<div class="row">
 			<div>
@@ -57,10 +57,18 @@
 					</tr>
 				</c:forEach>
 			</table>
-
-			<div class="row">
-				<a href="./${board}Write.do" class="btn btn-primary">Write</a>
-			</div>
+			<c:choose>
+				<c:when test="${board eq 'notice'}">
+					<c:if test="${not empty member and member.kind eq 'T'}">
+						<c:import url="../../../temp/writeButton.jsp" />
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<c:if test="${not empty member}">
+						<c:import url="../../../temp/writeButton.jsp" />
+					</c:if>
+				</c:otherwise>
+			</c:choose>
 			<div class="row" align="center">
 
 				<ul class="pagination">

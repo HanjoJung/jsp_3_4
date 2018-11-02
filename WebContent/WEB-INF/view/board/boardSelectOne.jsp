@@ -36,28 +36,26 @@
 					<td colspan="5" align="center">${dto.contents}</td>
 				</tr>
 				<tr>
-					<td colspan="5"><c:forEach items="list">
+					<td colspan="5">
+					<c:forEach items="${files}" var="fileDTO">
 							<h3 style="display: inline-block;">
-								<a href="../upload/${fileDTO.getFname()}"> <img
+								<a href="../upload/${fileDTO.fname}"><img
 									style="max-width: 50px; max-height: 50px;" alt=""
-									src="../upload/${fileDTO.getFname()}"></a>
+									src="../upload/${fileDTO.fname}"></a>
 							</h3>
-						</c:forEach></td>
+					</c:forEach></td>
 				</tr>
 
 			</table>
-			<a href="${requestScope.board}List.do"><button>목록으로</button></a> <a
-				href="./${requestScope.board}Update.do?num=${dto.num}"><button>수정</button></a>
-			<a href="./${requestScope.board}Delete.do?num=${dto.num}"><button>삭제</button></a>
+			<a href="${board}List.do"><button>목록으로</button></a>
+			<c:if test="${not empty member and member.id eq dto.writer}">
+				<a
+					href="./${board}Update.do?num=${dto.num}&writer=${dto.writer}"><button>수정</button></a>
+				<a
+					href="./${board}Delete.do?num=${dto.num}&writer=${dto.writer}"><button>삭제</button></a>
+			</c:if>
 		</div>
 	</div>
 	<jsp:include page="../../../temp/footer.jsp"></jsp:include>
 </body>
 </html>
-
-
-
-
-
-
-

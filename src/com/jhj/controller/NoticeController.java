@@ -35,9 +35,6 @@ public class NoticeController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-
 		// /notice/notice***.do
 		// /notice***.do
 		String command = request.getPathInfo();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jhj.action.ActionFoward;
 import com.jhj.board.BoardDTO;
@@ -21,7 +22,7 @@ public class QnaService implements BoardService{
 	
 	@Override
 	public ActionFoward insert(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

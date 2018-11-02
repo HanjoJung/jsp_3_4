@@ -32,8 +32,7 @@ public class QnaController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+
 		
 		String command = request.getPathInfo();
 		
@@ -44,6 +43,7 @@ public class QnaController extends HttpServlet {
 		}else if(command.equals("/qnaSelectOne.do")) {
 			actionFoward= qnaService.selectOne(request, response);
 		}else if(command.equals("/qnaWrite.do")) {
+			actionFoward= qnaService.insert(request, response);
 			
 		}
 		
