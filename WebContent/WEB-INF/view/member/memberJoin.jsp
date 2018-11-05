@@ -9,11 +9,23 @@
 <c:import url="../../../temp/bootStrap.jsp" />
 <script type="text/javascript">
 	$(function() {
+		$("#join").click(function() {
+			var check = $("#idCheck").val();
+			if (check == "s") {
+				alert("OK");
+			} else {
+				alert("id 중복 체크");
+			}
+		})
+		$("#id").change(function() {
+			$("#idCheck").val('f');
+		})
 		$("#btn").click(
 				function() {
-
-					var id=document.frm.id.value;
-					window.open("./memberCheckId.do?id="+id, "", "width=300, height=200, top=300, left=500");
+					$("#idCheck").val('f');
+					var id = document.frm.id.value;
+					window.open("./memberCheckId.do?id=" + id, "",
+							"width=300, height=200, top=300, left=500");
 				})
 	})
 </script>
@@ -25,11 +37,13 @@
 		<div class="row">
 			<form action="./memberJoin.do" method="post"
 				enctype="multipart/form-data" name="frm">
+				<input type="hidden" value="f" id="idCheck" name="idCheck">
+
 				<div class="form-group">
 					<label for="id">ID:</label> <input type="text" class="form-control"
-						id="id" placeholder="Enter id" name="id">
+						id="id" placeholder="Enter id" name="id"> <input
+						type="button" id="btn" class="btn btn-default" value="중복확인">
 				</div>
-				<input type="button" id="btn" class="btn btn-default" value="중복확인">
 				<div class="form-group">
 					<label for="pw1">PASSWORD:</label> <input type="password"
 						class="form-control" id="pw1" placeholder="Enter password"
@@ -73,7 +87,7 @@
 						class="form-control" id="file" name="f">
 				</div>
 
-				<button type="submit" class="btn btn-default">가입</button>
+				<input type="button" id="join" class="btn btn-default" value="가입">
 			</form>
 		</div>
 	</div>

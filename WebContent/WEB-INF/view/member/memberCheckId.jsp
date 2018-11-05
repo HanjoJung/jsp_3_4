@@ -12,6 +12,7 @@
 		$("#btn").click(function() {
 			//opener.document.getElementById("id").value='${param.id}';
 			opener.document.frm.id.value = '${param.id}';
+			opener.document.frm.idCheck.value = 's';
 			self.close();
 		})
 	})
