@@ -41,9 +41,7 @@ private String encode;
 
 		// pass the request along the filter chain
 		// 요청 발생시 실행
-		System.out.println("Character Filter In");
 		chain.doFilter(request, response); // Controller로 이동
-		System.out.println("Character Filter out");
 		// 응답 발생시 실행
 	}
 

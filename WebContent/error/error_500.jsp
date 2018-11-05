@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1>서버 오류</h1>
-<a href="${PageContext.contextPath}/index.jsp">Main</a>
+<a href="${pageContext.request.contextPath}/index.jsp">Main</a>
 </body>
 </html>

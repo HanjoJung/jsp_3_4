@@ -1,6 +1,7 @@
 package com.jhj.notice;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,7 +12,6 @@ import com.jhj.board.BoardDTO;
 import com.jhj.page.RowNumber;
 import com.jhj.page.Search;
 import com.jhj.util.DBConnector;
-import com.oreilly.servlet.MultipartRequest;
 
 public class NoticeDAO implements BoardDAO{
 
@@ -142,7 +142,4 @@ public class NoticeDAO implements BoardDAO{
 		return result;
 		
 	}
-
-	
-	
 }
